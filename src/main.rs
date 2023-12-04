@@ -1,4 +1,5 @@
 use anyhow::{Ok, Result};
+use ava_bot::handlers::index_page;
 use axum::{routing::get, Router};
 use axum_server::tls_rustls::RustlsConfig;
 use clap::Parser;
@@ -24,7 +25,8 @@ async fn main() -> Result<()> {
     let args = Args::parse();
     let state = Arc::new(AppState::default());
     let app = Router::new()
-        .route("/", get(|| async { "Welcome to AGI..." }))
+        .route("/", get(index_page))
+        .nest_service("/public", ServeDir::new("/public"))
         .with_state(state);
 
     let addr = format!("0.0.0.0:{}", args.port);

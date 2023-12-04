@@ -1,0 +1,11 @@
+{% extends "base.html.j2" %} {% block content %}
+<div class="w-2/3 mx-auto">
+    <h1 class="text-center text-2xl">Hello word</h1>
+    <div hx-ext="sse" sse-connect="/chats" sse-swap="message" hx-swap="afternd">
+        content of this box will be updated in real time with every SSE message
+        receiveds from the chatroom.
+    </div>
+</div>
+
+
+{% block content %}
