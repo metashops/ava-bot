@@ -1,11 +1,18 @@
 {% extends "base.html.j2" %} {% block content %}
-<div class="w-2/3 mx-auto">
-    <h1 class="text-center text-2xl">Hello word</h1>
-    <div hx-ext="sse" sse-connect="/chats" sse-swap="message" hx-swap="afternd">
-        content of this box will be updated in real time with every SSE message
-        receiveds from the chatroom.
-    </div>
+<div class="items-center justify-center p-2 mx-auto mt-2 max-w-7xl">
+  <h1 class="text-2xl text-center">Ava Bot</h1>
+  <ol id="chats" class="relative p-2 mt-4 border-gray-200 border-s dark:border-gray-700">
+  </ol>
+
+  <div class="flex items-center justify-center px-2 mt-4" x-data="recordingState()">
+    <button class="w-16 h-16 text-white rounded-full" @keyup.space.window="toggleRecording()"
+      :class="{'bg-red-800 animate-pulse': isRecording, 'bg-red-500': !isRecording}">
+      <i class="fa-solid fa-microphone fa-xl"></i>
+    </button>
+  </div>
+  <div id="signals" class="flex items-center justify-center p-2 text-center">
+  </div>
 </div>
 
 
-{% block content %}
+{% endblock %}
